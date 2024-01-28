@@ -1,18 +1,18 @@
+import { useState } from "react";
 import "./App.css";
-import MovieList from "./Components/Cine/MovieList";
-import Footer from "./Components/Footer";
-import Navbar from "./Components/Navbar";
-import Sidebar from "./Components/Sidebar";
+import { MovieContext, ThemeContext } from "./context";
+import Page from "./Components/Page";
 
 function App() {
+  const [movieData, setMovieData] = useState([]);
+  const [darkTheme, setDarkTheme] = useState(true);
   return (
     <>
-      <Navbar />
-      <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-        <Sidebar />
-        <MovieList />
-      </div>
-      <Footer />
+      <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
+        <MovieContext.Provider value={{ movieData, setMovieData }}>
+          <Page />
+        </MovieContext.Provider>
+      </ThemeContext.Provider>
     </>
   );
 }
